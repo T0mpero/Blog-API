@@ -7,8 +7,6 @@ router.get("/admin/categories/new", (req, res) =>{
     res.render('admin/categories/newCategory');
 });
 
-
-
 router.get('/admin/categories', async (req,res)=>{
     const categories = await CategoriesModel.findAll();
 
@@ -34,19 +32,30 @@ router.post('/categories/delete', (req, res) =>{
     
     if (id != undefined){
         if(!isNaN(id)){
+            CategoriesModel.destroy({where : {id : id}})
+            .then(()=> {res.redirect('/admin/categories');});
+        }
+        else{res.redirect('/admin/categories');}
+    }
+    else{res.redirect('/admin/categories');}
+});
 
-            CategoriesModel.destroy({
-                where : {id : id}
-            }).then(( )=> {
-                res.redirect('/admin/categories')
-            })
+router.get('/admin/categories/edit/:id', (req,res) =>{
+    let {id} = req.params; 
 
+    if(isNaN(id)){
+        res.redirect('/admin/categories');
+    }
+    CategoriesModel.findByPk(id)
+    .then(category =>{
+        if(category != undefined){
+            res.render('admin/categories/editCategory',  {category : category});
         }else{
             res.redirect('/admin/categories');
         }
-    }else{
+    }).catch(() =>{
         res.redirect('/admin/categories');
-    }
+    });
 });
 
 

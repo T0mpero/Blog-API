@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Category</title>
+</head>
+<body>
+    <form action="/categories/save" method="post" >
+        <label for="title">EDIT CATEGORY:</label>
+        <input type="text" name="title" value=" <%= category.title %>" placeholder="<%= category.title %>">
+        <button type="submit">UPDATE</button>
+    </form>
+</body>
+</html>

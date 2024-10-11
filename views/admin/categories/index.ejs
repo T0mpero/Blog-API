@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+</head>
+<body>
+    <div>
+        <h2>Categories</h2>
+        <a href="/admin/categories/new">Create new category</a>
+        <hr>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>TITLE</th>
+                <th>SLUG</th>
+                <th>ACTIONS</th>
+            </tr>
+        </thead>
+        <br>
+        <tbody>
+            <% categories.forEach(category =>{ %>
+                <tr>
+                    <th><%= category.id%></th>
+                    <th><%= category.title%></th>
+                    <th><%= category.slug%></th>
+                    <th ><button style="display: flex;">Edit</button>
+                        <form  action="/categories/delete" method="post">
+                            <input type="hidden" name="id" value="<%= category.id%>">
+                            <button>Delet</button>
+                        </form>
+                        
+                    </th>
+                </tr>
+            <% }) %>
+        </tbody>
+
+    </div>
+    
+</body>
+</html>
